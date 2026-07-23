@@ -471,6 +471,13 @@ function hoyISO() {
   return `${y}-${m}-${day}`;
 }
 
+// Las cuentas de prueba (rol admin) pueden enviar cualquier audio en
+// cualquier momento, sin esperar a que llegue su fecha oficial.
+function audioDisponible(fechaAudio, hoy) {
+  if (sesion && sesion.rol === 'admin') return true;
+  return fechaAudio <= hoy;
+}
+
 function mostrarPantalla(id) {
   document.querySelectorAll('main > section').forEach(s => s.classList.add('oculto'));
   document.getElementById(id).classList.remove('oculto');
@@ -555,7 +562,7 @@ async function cargarDashboard() {
     const fechaEnvio = (dashboardData.audiosEnviados || {})['A'+i] || '';
     if (fechaEnvio) {
       enviados.push({ num: i, fechaEnvio });
-    } else if (fechaAudio <= hoy) {
+    } else if (audioDisponible(fechaAudio, hoy)) {
       pendientes.push({ num: i });
     } else {
       bloqueados.push({ num: i });
@@ -573,7 +580,7 @@ async function cargarDashboard() {
     const fechaAudio = FECHAS_AUDIOS[i-1];
     let estadoClase, estadoTexto;
     if (fechaEnvio) { estadoClase = 'enviado'; estadoTexto = 'Enviado'; }
-    else if (fechaAudio <= hoy) { estadoClase = 'pendiente'; estadoTexto = 'Pendiente'; }
+    else if (audioDisponible(fechaAudio, hoy)) { estadoClase = 'pendiente'; estadoTexto = 'Pendiente'; }
     else { estadoClase = 'bloqueado'; estadoTexto = 'Aún no disponible'; }
 
     const fila = document.createElement('div');
@@ -616,7 +623,7 @@ function irASeleccion(modo) {
     for (let i = 1; i <= TOTAL_AUDIOS; i++) {
       const fechaEnvio = (dashboardData.audiosEnviados || {})['A'+i] || '';
       const fechaAudio = FECHAS_AUDIOS[i-1];
-      if (!fechaEnvio && fechaAudio <= hoy) disponibles.push(i);
+      if (!fechaEnvio && audioDisponible(fechaAudio, hoy)) disponibles.push(i);
     }
 
     if (disponibles.length === 0) {
