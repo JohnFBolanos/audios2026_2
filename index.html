@@ -49,11 +49,11 @@
     position:relative;
   }
   header.top img{
-    height:34px;
+    height:56px;
     background:var(--blanco);
-    padding:8px 14px;
-    border-radius:10px;
-    margin-bottom:14px;
+    padding:10px 18px;
+    border-radius:12px;
+    margin-bottom:16px;
   }
   header.top h1{
     font-size:1.5rem;
@@ -721,6 +721,25 @@ function reiniciarGrabacion() {
   document.getElementById('success-envio').classList.add('oculto');
 }
 
+let mimeTypeGrabacion = 'audio/webm'; // se ajusta según lo que soporte el navegador
+
+function elegirMimeTypeSoportado() {
+  const candidatos = [
+    'audio/webm;codecs=opus',
+    'audio/webm',
+    'audio/mp4',
+    'audio/aac',
+    'audio/ogg;codecs=opus',
+    'audio/mpeg'
+  ];
+  for (const tipo of candidatos) {
+    if (window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(tipo)) {
+      return tipo;
+    }
+  }
+  return ''; // deja que el navegador use su default si ninguno de la lista es soportado
+}
+
 async function toggleGrabacion() {
   const btnMic = document.getElementById('btn-mic');
 
@@ -729,10 +748,19 @@ async function toggleGrabacion() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       chunksGrabacion = [];
-      mediaRecorder = new MediaRecorder(stream);
+
+      const tipoElegido = elegirMimeTypeSoportado();
+      mediaRecorder = tipoElegido
+        ? new MediaRecorder(stream, { mimeType: tipoElegido })
+        : new MediaRecorder(stream);
+
       mediaRecorder.ondataavailable = e => chunksGrabacion.push(e.data);
       mediaRecorder.onstop = () => {
-        audioBlobActual = new Blob(chunksGrabacion, { type: 'audio/webm' });
+        // Se usa el mimeType REAL con el que grabó el navegador (Safari/iPhone
+        // graba en mp4/aac, no en webm) — forzar "audio/webm" aquí rompía la
+        // vista previa en esos celulares.
+        mimeTypeGrabacion = mediaRecorder.mimeType || tipoElegido || 'audio/webm';
+        audioBlobActual = new Blob(chunksGrabacion, { type: mimeTypeGrabacion });
         const url = URL.createObjectURL(audioBlobActual);
         const audioEl = document.getElementById('audio-preview');
         audioEl.src = url;
@@ -802,6 +830,7 @@ async function enviarAudio() {
       cedula: sesion.cedula,
       audioNum: audioSeleccionado,
       fileData: base64,
+      mimeType: mimeTypeGrabacion,
       reemplazo: modoActual === 'reemplazo'
     };
 
