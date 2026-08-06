@@ -6,7 +6,6 @@
 <title>Proyecto Audios 2026-2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root{
     --verde-oscuro: #16352A;
@@ -316,148 +315,6 @@
     cursor:pointer; margin-bottom:14px; padding:0;
   }
 
-  /* ---- Resultados ---- */
-  .chip-estado{
-    font-size:0.72rem;
-    padding:3px 9px;
-    border-radius:999px;
-    font-weight:700;
-    display:inline-block;
-  }
-  .chip-estado.positivo{ background:#D8EDDF; color:#1E6B3F; }
-  .chip-estado.neutro{ background:#FFF3CD; color:#8A6314; }
-  .chip-estado.negativo{ background:#FBEAE8; color:var(--rojo); }
-
-  .chip-alerta{
-    font-size:0.68rem;
-    padding:3px 9px;
-    border-radius:999px;
-    font-weight:700;
-    display:inline-block;
-    margin-right:4px;
-    margin-bottom:4px;
-  }
-  .chip-alerta.danger{ background:#FBEAE8; color:var(--rojo); }
-  .chip-alerta.warning{ background:#FFF3CD; color:#8A6314; }
-  .chip-alerta.ok{ background:#D8EDDF; color:#1E6B3F; }
-
-  .resultados-resumen{
-    display:flex;
-    gap:10px;
-    margin-bottom:18px;
-  }
-  .resultados-resumen .stat{
-    flex:1;
-    background:var(--verde-suave);
-    border-radius:12px;
-    padding:14px 8px;
-    text-align:center;
-  }
-  .resultados-resumen .stat .num{
-    font-family:'Fraunces',serif;
-    font-size:1.3rem;
-    color:var(--verde-oscuro);
-    display:block;
-  }
-  .resultados-resumen .stat .lbl{
-    font-size:0.64rem;
-    text-transform:uppercase;
-    letter-spacing:0.03em;
-    color:var(--texto-suave);
-  }
-
-  .chart-wrap{
-    background:var(--blanco);
-    border:1px solid var(--borde);
-    border-radius:var(--radio);
-    padding:16px 14px 10px;
-    margin-bottom:18px;
-  }
-  .chart-wrap h3{
-    font-size:0.95rem;
-    margin-bottom:10px;
-  }
-  .chart-wrap canvas{ width:100% !important; max-height:220px; }
-
-  .fila-resultado{
-    padding:12px 4px;
-    border-bottom:1px solid var(--borde);
-  }
-  .fila-resultado:last-child{ border-bottom:none; }
-  .fila-resultado .fr-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:6px;
-  }
-  .fila-resultado .fr-top .etiqueta{ font-weight:700; font-size:0.9rem; }
-  .fila-resultado .fr-metrics{
-    display:flex;
-    gap:14px;
-    font-size:0.78rem;
-    color:var(--texto-suave);
-    flex-wrap:wrap;
-  }
-  .fila-resultado .fr-metrics b{ color:var(--texto); }
-
-  .fila-estudiante-grupo{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    padding:13px 4px;
-    border-bottom:1px solid var(--borde);
-    gap:10px;
-  }
-  .fila-estudiante-grupo:last-child{ border-bottom:none; }
-  .fila-estudiante-grupo .feg-nombre{
-    font-weight:700;
-    font-size:0.88rem;
-    margin-bottom:4px;
-  }
-  .fila-estudiante-grupo .feg-metrics{
-    font-size:0.76rem;
-    color:var(--texto-suave);
-  }
-  .fila-estudiante-grupo .feg-envios{
-    text-align:right;
-    font-size:0.78rem;
-    color:var(--texto-suave);
-    white-space:nowrap;
-    flex-shrink:0;
-  }
-
-  .leyenda-resaltado{
-    display:flex;
-    gap:14px;
-    font-size:0.74rem;
-    color:var(--texto-suave);
-    margin-bottom:14px;
-    flex-wrap:wrap;
-  }
-
-  .fr-transcripcion{
-    margin-top:10px;
-    padding-top:10px;
-    border-top:1px dashed var(--borde);
-  }
-  .fr-transcripcion-texto{
-    font-size:0.85rem;
-    line-height:1.65;
-    color:var(--texto);
-  }
-  .hl-muletilla{ background:#FFF3CD; color:#8A6314; padding:0 2px; border-radius:3px; }
-  .hl-confusion{ background:#FBEAE8; color:var(--rojo); padding:0 2px; border-radius:3px; font-weight:600; }
-  .hl-aprendizaje{ background:#D8EDDF; color:#1E6B3F; padding:0 2px; border-radius:3px; font-weight:600; }
-
-  .aviso-vacio{
-    text-align:center;
-    color:var(--texto-suave);
-    padding:26px 14px;
-    font-size:0.88rem;
-    background:var(--verde-suave);
-    border-radius:var(--radio);
-  }
-
   .oculto{ display:none !important; }
 
   footer.marca{
@@ -515,13 +372,6 @@
       <input type="password" id="input-clave" inputmode="numeric" placeholder="Tu clave de 3 dígitos">
 
       <button class="primario" id="btn-ingresar" onclick="ingresar()">Ingresar</button>
-
-      <div id="selector-grupo-login" class="oculto" style="margin-top:18px;">
-        <p style="font-size:0.85rem; color:var(--texto-suave); margin-bottom:12px;">
-          Tu cédula y clave están registradas en más de un grupo. ¿Cuál quieres ver?
-        </p>
-        <div class="opciones-audio" id="opciones-grupo-login"></div>
-      </div>
     </section>
 
     <!-- ============ PANTALLA: DASHBOARD ============ -->
@@ -542,7 +392,6 @@
       <div class="acciones">
         <button class="primario" id="btn-nuevo" onclick="irASeleccion('nuevo')">🎙️ Enviar nuevo audio</button>
         <button class="secundario" id="btn-reemplazar" onclick="irASeleccion('reemplazo')">🔁 Reemplazar un audio enviado</button>
-        <button class="secundario" id="btn-resultados" onclick="irAResultados()">📊 Ver mis resultados</button>
       </div>
 
       <button class="link" onclick="cerrarSesion()" style="margin-top:18px;">Cerrar sesión</button>
@@ -581,15 +430,6 @@
       <button class="secundario oculto" id="btn-regrabar" onclick="reiniciarGrabacion()">Grabar de nuevo</button>
     </section>
 
-    <!-- ============ PANTALLA: RESULTADOS ============ -->
-    <section id="pantalla-resultados" class="oculto">
-      <button class="volver" onclick="volverADashboard()">← Volver</button>
-      <h2 id="resultados-titulo">Resultados</h2>
-      <p id="resultados-subtitulo" style="color:var(--texto-suave); font-size:0.85rem; margin:6px 0 18px;"></p>
-
-      <div id="resultados-contenido"></div>
-    </section>
-
   </main>
 
   <footer class="marca">Universidad Externado de Colombia · Proyecto de investigación 2026-2</footer>
@@ -603,7 +443,7 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzJW5la3MDj5ggI
 
 const FECHAS_AUDIOS = ["2026-07-24", "2026-07-31", "2026-08-07", "2026-08-14", "2026-08-21", "2026-08-28", "2026-09-04", "2026-09-11", "2026-09-18", "2026-09-25", "2026-10-02", "2026-10-16", "2026-10-23", "2026-10-30", "2026-11-06"]; // formato YYYY-MM-DD, índice 0 = A1
 const LABELS_AUDIO  = {"1": "A1 · Vie 24 Jul", "2": "A2 · Vie 31 Jul", "3": "A3 · Vie 7 Ago", "4": "A4 · Vie 14 Ago", "5": "A5 · Vie 21 Ago", "6": "A6 · Vie 28 Ago", "7": "A7 · Vie 4 Sep", "8": "A8 · Vie 11 Sep", "9": "A9 · Vie 18 Sep", "10": "A10 · Vie 25 Sep", "11": "A11 · Vie 2 Oct", "12": "A12 · Vie 16 Oct", "13": "A13 · Vie 23 Oct", "14": "A14 · Vie 30 Oct", "15": "A15 · Vie 6 Nov"};
-const NOMBRES_GRUPO = {"ProgramacionI_Sierra": "Programación I — Jose Sierra", "ProgramacionII_Bolanos": "Programación II — John Bolaños", "ProgramacionII_Sierra": "Programación II — Jose Sierra", "ProgramacionII_Torres_11-1": "Programación II (11-1) — Arley Torres", "ProgramacionII_Torres_2-4": "Programación II (2-4) — Arley Torres"};
+const NOMBRES_GRUPO = {"ProgramacionI_Sierra": "Programación I — Jose Sierra", "ProgramacionII_Bolanos": "Programación II — John Bolaños", "ProgramacionII_Sierra": "Programación II — Jose Sierra", "ProgramacionII_Torres_11-1": "Programación II (11-1) — Arley Torres", "ProgramacionII_Torres_2-4": "Programación II (2-4) — Jose Sierra"};
 const TOTAL_AUDIOS  = FECHAS_AUDIOS.length;
 
 /* ============================================================
@@ -653,14 +493,11 @@ function cambiarTab(tab) {
 /* ============================================================
    LOGIN
    ============================================================ */
-let loginPendiente = null; // { cedula, clave } mientras el usuario elige grupo (caso Arley Torres)
-
 async function ingresar() {
   const cedula = document.getElementById('input-cedula').value.trim();
   const clave  = document.getElementById('input-clave').value.trim();
   const errorBox = document.getElementById('error-login');
   errorBox.classList.add('oculto');
-  document.getElementById('selector-grupo-login').classList.add('oculto');
 
   if (!cedula || !clave) {
     errorBox.textContent = 'Ingresa tu cédula y tu clave.';
@@ -677,21 +514,16 @@ async function ingresar() {
     const resp = await fetch(url);
     const data = await resp.json();
 
-    if (data.ok) {
-      sesion = data;
-      await cargarDashboard();
+    if (!data.ok) {
+      errorBox.textContent = data.error || 'Cédula o clave incorrecta.';
+      errorBox.classList.remove('oculto');
+      btn.disabled = false;
+      btn.textContent = 'Ingresar';
       return;
     }
 
-    if (data.multiple) {
-      // Misma cédula+clave en más de un grupo: se le pide elegir cuál ver.
-      loginPendiente = { cedula, clave };
-      mostrarSelectorGrupoLogin(data.opciones);
-      return;
-    }
-
-    errorBox.textContent = data.error || 'Cédula o clave incorrecta.';
-    errorBox.classList.remove('oculto');
+    sesion = data;
+    await cargarDashboard();
   } catch (err) {
     errorBox.textContent = 'No se pudo conectar. Verifica tu internet e intenta de nuevo.';
     errorBox.classList.remove('oculto');
@@ -701,50 +533,9 @@ async function ingresar() {
   }
 }
 
-function mostrarSelectorGrupoLogin(opciones) {
-  const contenedor = document.getElementById('opciones-grupo-login');
-  contenedor.innerHTML = '';
-  opciones.forEach(op => {
-    const div = document.createElement('div');
-    div.className = 'opcion-audio';
-    div.innerHTML = `<span>${NOMBRES_GRUPO[op.grupo] || op.grupo}</span>`;
-    div.onclick = () => elegirGrupoLogin(op.grupo);
-    contenedor.appendChild(div);
-  });
-  document.getElementById('selector-grupo-login').classList.remove('oculto');
-}
-
-async function elegirGrupoLogin(grupo) {
-  if (!loginPendiente) return;
-  const errorBox = document.getElementById('error-login');
-  errorBox.classList.add('oculto');
-
-  try {
-    const url = `${APPS_SCRIPT_URL}?action=login&cedula=${encodeURIComponent(loginPendiente.cedula)}&clave=${encodeURIComponent(loginPendiente.clave)}&grupo=${encodeURIComponent(grupo)}`;
-    const resp = await fetch(url);
-    const data = await resp.json();
-
-    if (!data.ok) {
-      errorBox.textContent = data.error || 'No se pudo ingresar a ese grupo.';
-      errorBox.classList.remove('oculto');
-      return;
-    }
-
-    sesion = data;
-    loginPendiente = null;
-    document.getElementById('selector-grupo-login').classList.add('oculto');
-    await cargarDashboard();
-  } catch (err) {
-    errorBox.textContent = 'No se pudo conectar. Intenta de nuevo.';
-    errorBox.classList.remove('oculto');
-  }
-}
-
 function cerrarSesion() {
   sesion = null;
   dashboardData = null;
-  loginPendiente = null;
-  document.getElementById('selector-grupo-login').classList.add('oculto');
   document.getElementById('input-cedula').value = '';
   document.getElementById('input-clave').value = '';
   mostrarPantalla('pantalla-login');
@@ -760,11 +551,6 @@ async function cargarDashboard() {
 
   document.getElementById('dash-nombre').textContent = `Hola, ${sesion.nombre.split(' ')[0]}`;
   document.getElementById('dash-curso').textContent = NOMBRES_GRUPO[sesion.grupo] || sesion.grupo;
-
-  const btnResultados = document.getElementById('btn-resultados');
-  btnResultados.textContent = (sesion.rol === 'estudiante')
-    ? '📊 Ver mis resultados'
-    : '📊 Ver resultados del grupo';
 
   const hoy = hoyISO();
   const enviados = [];
@@ -1072,373 +858,6 @@ async function enviarAudio() {
     errorBox.classList.remove('oculto');
     btn.disabled = false;
     btn.textContent = 'Enviar audio';
-  }
-}
-
-/* ============================================================
-   LISTAS DE PALABRAS — deben coincidir exactamente con las del
-   notebook de Colab (Whisper_AnalisisTexto_Semestre2026_2), para
-   que lo resaltado en pantalla sea fiel a lo que realmente se contó.
-   ============================================================ */
-const MULETILLAS = [
-  "eh", "ehh", "ehhh", "ah", "ahh", "um", "umm", "mm", "mmm",
-  "o sea", "o sea que", "digamos", "digamos que", "pues", "pues que",
-  "bueno", "entonces", "o bueno", "como", "como que", "tipo",
-  "básicamente", "literalmente", "obviamente", "claramente",
-  "de pronto", "a ver", "es que", "la verdad", "la verdad es que"
-];
-
-const PALABRAS_CONFUSION = [
-  "no sé", "no se", "no entiendo", "no entendí", "no entendi",
-  "no comprendo", "no comprendí", "no comprendi",
-  "me confundí", "me confundi", "me perdí", "me perdi",
-  "no pude", "no logré", "no logre", "me costó", "me costo",
-  "difícil", "dificil", "complicado", "complicada", "complejo",
-  "compleja", "no quedó claro", "no quedo claro", "confuso", "confusa",
-  "no supe", "no entendimos", "perdido", "perdida", "me trabé", "me trabe"
-];
-
-const PALABRAS_APRENDIZAJE = [
-  "aprendí", "aprendi", "aprendimos", "entendí", "entendi",
-  "entendimos", "comprendí", "comprendi", "comprendimos",
-  "logré", "logre", "logramos", "pude", "pudimos",
-  "quedó claro", "quedo claro", "me gustó", "me gusto",
-  "interesante", "útil", "util", "me sirvió", "me sirvio",
-  "ahora sé", "ahora se", "me di cuenta", "descubrí", "descubri"
-];
-
-function construirMapaResaltado() {
-  const mapa = [];
-  MULETILLAS.forEach(t => mapa.push({ term: t, cat: 'muletilla' }));
-  PALABRAS_CONFUSION.forEach(t => mapa.push({ term: t, cat: 'confusion' }));
-  PALABRAS_APRENDIZAJE.forEach(t => mapa.push({ term: t, cat: 'aprendizaje' }));
-  // Términos más largos primero, para que frases como "no entendí" se
-  // resalten completas en vez de que una palabra suelta más corta se
-  // adelante y las parta.
-  mapa.sort((a, b) => b.term.length - a.term.length);
-  return mapa;
-}
-const MAPA_RESALTADO = construirMapaResaltado();
-
-function escapeRegExp(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function escaparHtml(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
-// Envuelve en <span> las muletillas (amarillo), palabras de confusión (rojo)
-// y palabras de aprendizaje/afirmación (verde) dentro de una transcripción.
-// El texto se escapa primero (por seguridad), y el resaltado se hace por
-// coincidencia de texto simple, igual que el conteo en el notebook de Colab.
-function resaltarTranscripcion(texto) {
-  if (!texto) return '<em style="color:var(--texto-suave);">Sin transcripción.</em>';
-
-  const escapado = escaparHtml(String(texto));
-  const terminos = MAPA_RESALTADO.map(m => escapeRegExp(m.term)).join('|');
-  let regex;
-  try {
-    // Lookaround con \p{L} para no partir palabras con tildes/eñes.
-    regex = new RegExp(`(?<![\\p{L}])(${terminos})(?![\\p{L}])`, 'giu');
-  } catch (e) {
-    // Navegadores muy antiguos sin soporte de lookbehind/Unicode: se
-    // muestra el texto escapado sin resaltar, en vez de romper la página.
-    return escapado;
-  }
-
-  const categoriaPorTermino = {};
-  MAPA_RESALTADO.forEach(m => { categoriaPorTermino[m.term.toLowerCase()] = m.cat; });
-
-  return escapado.replace(regex, (match) => {
-    const cat = categoriaPorTermino[match.toLowerCase()];
-    if (!cat) return match;
-    return `<span class="hl-${cat}">${match}</span>`;
-  });
-}
-
-/* ============================================================
-   RESULTADOS (análisis de texto — pestaña nueva)
-   Estudiante: usa lo que ya trajo action=dashboard (sin llamada extra).
-   Docente/admin: llama action=grupo para el panorama del salón, y puede
-   entrar al detalle de cualquier estudiante (mismo panel que ve el
-   estudiante en "Mis resultados"), llamando action=dashboard con la
-   cédula de ese estudiante.
-   ============================================================ */
-let chartResultados = null;
-
-function irAResultados() {
-  const contenido = document.getElementById('resultados-contenido');
-  contenido.innerHTML = '<p class="aviso-vacio">Cargando resultados...</p>';
-
-  if (sesion.rol === 'estudiante') {
-    document.getElementById('resultados-titulo').textContent = 'Mis resultados';
-    document.getElementById('resultados-subtitulo').textContent =
-      'Análisis de tus audios enviados. Se actualiza aproximadamente cada 8 días.';
-    renderResultadosEstudiante();
-  } else {
-    cargarResultadosGrupo();
-  }
-
-  mostrarPantalla('pantalla-resultados');
-}
-
-function badgeEstado(estado) {
-  if (!estado) return '';
-  const clases = { positivo: 'positivo', neutro: 'neutro', negativo: 'negativo' };
-  const clase = clases[estado] || 'neutro';
-  return `<span class="chip-estado ${clase}">${estado}</span>`;
-}
-
-function toggleDetalleAudio(id, btn) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const oculto = el.classList.toggle('oculto');
-  if (btn) btn.textContent = oculto ? 'Ver transcripción ▾' : 'Ocultar transcripción ▴';
-}
-
-/* ---------- Panel compartido: mismo HTML para el estudiante y para el
-   docente cuando entra al detalle de un estudiante ---------- */
-function construirHtmlPanelEstudiante(analisis, promGrupo) {
-  const numsConDatos = Object.keys(analisis).sort((a, b) => parseInt(a.slice(1)) - parseInt(b.slice(1)));
-
-  if (numsConDatos.length === 0) {
-    return {
-      html: `<div class="aviso-vacio">
-        📊 Todavía no hay análisis de texto disponible para estos audios.<br>
-        Se procesa por lotes aproximadamente cada 8 días — vuelve a revisar más adelante.
-      </div>`,
-      nums: []
-    };
-  }
-
-  const riquezas = numsConDatos.map(n => parseFloat(analisis[n].riqueza_lexica_pct) || 0);
-  const similitudes = numsConDatos
-    .map(n => parseFloat(analisis[n].similitud_docente))
-    .filter(v => !isNaN(v) && v > 0);
-  const riquezaProm = Math.round((riquezas.reduce((a, b) => a + b, 0) / riquezas.length) * 10) / 10;
-  const similitudProm = similitudes.length
-    ? Math.round((similitudes.reduce((a, b) => a + b, 0) / similitudes.length) * 100) / 100
-    : null;
-
-  let html = `
-    <div class="resultados-resumen">
-      <div class="stat"><span class="num">${riquezaProm}%</span><span class="lbl">Riqueza léxica</span></div>
-      <div class="stat"><span class="num">${similitudProm !== null ? similitudProm : '—'}</span><span class="lbl">Similitud docente</span></div>
-      <div class="stat"><span class="num">${numsConDatos.length}</span><span class="lbl">Audios analizados</span></div>
-    </div>
-
-    <div class="leyenda-resaltado">
-      <span>🟢 palabras de aprendizaje</span>
-      <span>🟡 muletillas</span>
-      <span>🔴 palabras de confusión</span>
-    </div>
-
-    <div class="chart-wrap">
-      <h3>Riqueza léxica por audio</h3>
-      <canvas id="canvas-resultados"></canvas>
-    </div>
-
-    <div class="card" style="padding:8px 16px;">
-  `;
-
-  numsConDatos.forEach(num => {
-    const d = analisis[num];
-    const sim = parseFloat(d.similitud_docente);
-    const idDetalle = `detalle-${num}-${Math.random().toString(36).slice(2, 7)}`;
-    html += `
-      <div class="fila-resultado">
-        <div class="fr-top">
-          <span class="etiqueta">${LABELS_AUDIO[num.replace('A', '')] || num}</span>
-          ${badgeEstado(d.estado_general)}
-        </div>
-        <div class="fr-metrics">
-          <span>Palabras: <b>${d.num_palabras}</b></span>
-          <span>Oraciones: <b>${d.num_oraciones}</b></span>
-          <span>Únicas: <b>${d.num_palabras_unicas}</b></span>
-          <span>Riqueza léxica: <b>${d.riqueza_lexica_pct}%</b></span>
-        </div>
-        <div class="fr-metrics" style="margin-top:2px;">
-          <span>🟢 Aprendizaje: <b>${d.total_aprendizaje}</b></span>
-          <span>🟡 Muletillas: <b>${d.total_muletillas}</b></span>
-          <span>🔴 Confusión: <b>${d.total_confusion}</b></span>
-          <span>Similitud docente: <b>${!isNaN(sim) && sim > 0 ? sim : '—'}</b></span>
-        </div>
-        <div id="${idDetalle}" class="fr-transcripcion oculto">
-          <div class="fr-transcripcion-texto">${resaltarTranscripcion(d.transcripcion)}</div>
-        </div>
-        <button class="link" style="padding:6px 0 0; font-size:0.78rem;" onclick="toggleDetalleAudio('${idDetalle}', this)">Ver transcripción ▾</button>
-      </div>
-    `;
-  });
-
-  html += `</div>`;
-  return { html, nums: numsConDatos };
-}
-
-/* ---------- Vista ESTUDIANTE (el propio usuario) ---------- */
-function renderResultadosEstudiante() {
-  const contenido = document.getElementById('resultados-contenido');
-  const analisis = (dashboardData && dashboardData.analisisEstudiante) || {};
-  const promGrupo = (dashboardData && dashboardData.promediosGrupo) || {};
-
-  const resultado = construirHtmlPanelEstudiante(analisis, promGrupo);
-  contenido.innerHTML = resultado.html;
-
-  if (resultado.nums.length > 0) {
-    dibujarChartResultados(resultado.nums, analisis, promGrupo);
-  }
-}
-
-function dibujarChartResultados(numsConDatos, analisis, promGrupo) {
-  const ctx = document.getElementById('canvas-resultados');
-  if (!ctx || typeof Chart === 'undefined') return;
-
-  const labels = numsConDatos.map(n => n);
-  const datosPropios = numsConDatos.map(n => parseFloat(analisis[n].riqueza_lexica_pct) || 0);
-  const datosGrupo = numsConDatos.map(n => {
-    const pg = promGrupo[n];
-    return pg ? pg.riqueza : null;
-  });
-
-  if (chartResultados) chartResultados.destroy();
-
-  chartResultados = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          label: 'Riqueza léxica',
-          data: datosPropios,
-          borderColor: '#1F5C41',
-          backgroundColor: 'rgba(31,92,65,0.12)',
-          tension: 0.3,
-          fill: true,
-        },
-        {
-          label: 'Promedio del grupo',
-          data: datosGrupo,
-          borderColor: '#B98A2E',
-          backgroundColor: 'transparent',
-          borderDash: [5, 4],
-          tension: 0.3,
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } },
-      scales: {
-        y: { beginAtZero: true, max: 100, ticks: { font: { size: 10 } } },
-        x: { ticks: { font: { size: 10 } } }
-      }
-    }
-  });
-}
-
-/* ---------- Vista DOCENTE/ADMIN: panorama del grupo ---------- */
-async function cargarResultadosGrupo() {
-  document.getElementById('resultados-titulo').textContent = 'Resultados del grupo';
-  document.getElementById('resultados-subtitulo').textContent =
-    'Vista general de tus estudiantes, ordenada por nivel de alerta. Toca un estudiante para ver su detalle.';
-
-  const contenido = document.getElementById('resultados-contenido');
-  contenido.innerHTML = '<p class="aviso-vacio">Cargando resultados...</p>';
-
-  try {
-    const url = `${APPS_SCRIPT_URL}?action=grupo&cedula=${encodeURIComponent(sesion.cedula)}&grupo=${encodeURIComponent(sesion.grupo)}`;
-    const resp = await fetch(url);
-    const data = await resp.json();
-
-    if (!data.ok) {
-      contenido.innerHTML = `<div class="aviso-vacio">No se pudo cargar el resultado del grupo.</div>`;
-      return;
-    }
-
-    const estudiantes = data.estudiantes || [];
-    if (estudiantes.length === 0) {
-      contenido.innerHTML = `<div class="aviso-vacio">Todavía no hay envíos registrados en este grupo.</div>`;
-      return;
-    }
-
-    const iconoNivel = { danger: '🔴', warning: '🟡', ok: '🟢' };
-
-    let html = '<div class="card" style="padding:8px 16px;">';
-    estudiantes.forEach((est, idx) => {
-      const chipsAlerta = (est.alertas || [])
-        .map(a => `<span class="chip-alerta ${a.tipo}">${a.msg}</span>`)
-        .join('');
-      html += `
-        <div class="fila-estudiante-grupo" data-idx="${idx}" style="cursor:pointer;">
-          <div>
-            <div class="feg-nombre">${iconoNivel[est.nivelAlerta] || ''} ${est.nombre}</div>
-            <div class="feg-metrics">
-              Riqueza: <b>${est.riqueza || '—'}%</b> ·
-              Similitud: <b>${est.similitud || '—'}</b>
-              ${est.estadoUlt ? ' · ' + badgeEstado(est.estadoUlt) : ''}
-            </div>
-            <div style="margin-top:4px;">${chipsAlerta}</div>
-          </div>
-          <div class="feg-envios">${est.enviados}/${est.totalAudios}<br>enviados</div>
-        </div>
-      `;
-    });
-    html += '</div>';
-    contenido.innerHTML = html;
-
-    // Se enlazan los clicks después de insertar el HTML (evita tener que
-    // escapar nombres con comillas dentro de un onclick inline).
-    contenido.querySelectorAll('.fila-estudiante-grupo').forEach(el => {
-      const idx = parseInt(el.dataset.idx, 10);
-      const est = estudiantes[idx];
-      el.addEventListener('click', () => verEstudianteComoDocente(est.cedula, est.nombre));
-    });
-
-  } catch (err) {
-    contenido.innerHTML = `<div class="aviso-vacio">Error cargando resultados: ${err.message}</div>`;
-  }
-}
-
-/* ---------- Vista DOCENTE/ADMIN: detalle de un estudiante puntual,
-   con el MISMO panel que ve el estudiante en "Mis resultados" ---------- */
-async function verEstudianteComoDocente(cedula, nombre) {
-  const contenido = document.getElementById('resultados-contenido');
-  contenido.innerHTML = `<p class="aviso-vacio">Cargando resultados de ${nombre}...</p>`;
-
-  document.getElementById('resultados-titulo').textContent = nombre;
-  document.getElementById('resultados-subtitulo').textContent =
-    'Vista individual — exactamente lo mismo que ve el estudiante en "Mis resultados".';
-
-  try {
-    const url = `${APPS_SCRIPT_URL}?action=dashboard&cedula=${encodeURIComponent(cedula)}&grupo=${encodeURIComponent(sesion.grupo)}`;
-    const resp = await fetch(url);
-    const data = await resp.json();
-
-    if (!data.ok) {
-      contenido.innerHTML = `<div class="aviso-vacio">No se pudo cargar la información de ${nombre}.</div>`;
-      return;
-    }
-
-    const analisis = data.analisisEstudiante || {};
-    const promGrupo = data.promediosGrupo || {};
-    const resultado = construirHtmlPanelEstudiante(analisis, promGrupo);
-
-    let html = `<button class="link" style="margin-bottom:12px;" onclick="cargarResultadosGrupo()">← Volver al grupo</button>`;
-    html += resultado.html;
-    contenido.innerHTML = html;
-
-    if (resultado.nums.length > 0) {
-      dibujarChartResultados(resultado.nums, analisis, promGrupo);
-    }
-  } catch (err) {
-    contenido.innerHTML = `<div class="aviso-vacio">Error: ${err.message}</div>`;
   }
 }
 </script>
